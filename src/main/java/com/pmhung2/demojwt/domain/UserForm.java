@@ -4,23 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "user")
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class UserForm {
     private Long id;
+    @NotEmpty(message = "Not Empty")
+    @Size(min = 5, max = 20, message = "Tên User phải từ 5 tới 20 ký tự")
     private String name;
+    @NotBlank
     private String userName;
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    @JoinTable(name = "user_role")
     private Role role;
 }
