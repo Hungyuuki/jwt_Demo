@@ -27,15 +27,19 @@ public class UserService implements IUserService {
     public User save(User user) {
         return userRepository.save(user);
     }
+
     @Override
     public void removeById(Long id) {
         userRepository.deleteById(id);
     }
 
-
     @Override
-    public User findByUserName(String username) {
-        return userRepository.findByUserName(username);
+    public Optional<User> findByUserName(String name) {
+        return userRepository.findByUserName(name);
     }
 
+    @Override
+    public Boolean existByUsername(String username) {
+        return userRepository.existsByUserName(username);
+    }
 }

@@ -1,6 +1,5 @@
 package com.pmhung2.demojwt.Controller;
 
-import com.pmhung2.demojwt.Service.role.IRoleService;
 import com.pmhung2.demojwt.Service.user.IUserService;
 import com.pmhung2.demojwt.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ private IUserService userService;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findIncomeById(@PathVariable Long id) {
+    public ResponseEntity<User> findUserById(@PathVariable Long id) {
         Optional<User> userOptional = userService.findById(id);
         if (!userOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -36,22 +35,23 @@ private IUserService userService;
     }
 
     @PostMapping
-    public ResponseEntity<User> saveIncome(@RequestBody User income) {
-        return new ResponseEntity<>(userService.save(income), HttpStatus.CREATED);
+    public ResponseEntity<User> saveUser(@RequestBody User user) {
+        System.out.println("cái gì đó");
+        return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateIncome(@PathVariable Long id, @RequestBody User income) {
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
         Optional<User> userOptional = userService.findById(id);
         if (!userOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        income.setId(userOptional.get().getId());
-        return new ResponseEntity<>(userService.save(income), HttpStatus.OK);
+        user.setId(userOptional.get().getId());
+        return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<User> deleteIncome(@PathVariable Long id) {
+    public ResponseEntity<User> deleteUser(@PathVariable Long id) {
         Optional<User> userOptional = userService.findById(id);
         if (!userOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
